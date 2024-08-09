@@ -88,10 +88,10 @@ Click on the **Actions** tab in the top menu and check whether workflows need en
 | --------- | ----------- |
 | env.name  | The name you want to display for your registry. |
 | env.description  | A short description to display when a store's information button is pressed. |
-| env.icon  | The image to display for your registry. You can upload an image to `/site/public/` and reference that by https://domain.com/1.0/image.png or if you aren't using a {sub}domain by referencing it from https://username.github.io/repositoryname/1.0/image.png where image.png is the name of the image you uploaded. Alternatively just put the url of an image available on the web. If you just want to get the registry up and working, leave the default value in place until later. |
+| env.icon  | The image to display for your registry. You can upload an image to `/site/public/` and reference that by https://domain.com/1.1/image.png or if you aren't using a {sub}domain by referencing it from https://username.github.io/repositoryname/1.1/image.png where image.png is the name of the image you uploaded. Alternatively just put the url of an image available on the web. If you just want to get the registry up and working, leave the default value in place until later. |
 | env.listUrl  | The link to the root of your site. For example https://username.github.io/repositoryname/ it should always include a trailing slash. |
 | env.contactUrl  | A link users can use to contact you on, such as your github issues page (right click the **Issues** tab in the top menu - next to the **Code** tab - and select `copy link address` and paste that in). |
-| basePath  | If you are using a domain or a subdomain, your basePath will just be `basePath: '/1.0',`, otherwise change the value to include what you chose for the repository name in step 2 `basePath: '/repositoryname/1.0',`. **The `1.0` will be replaced with the branch name automatically, so you should always keep it as 1.0.** |
+| basePath  | If you are using a domain or a subdomain, your basePath will just be `basePath: '/1.1',`, otherwise change the value to include what you chose for the repository name in step 2 `basePath: '/repositoryname/1.1',`. **The `1.1` will be replaced with the branch name automatically, so you should always keep it as 1.1.** |
 
 ### Commit changes
 <img width="600" alt="image" src="https://user-images.githubusercontent.com/5698566/230355586-39f6b4a6-9e01-482d-bab1-f0c1a292de24.png">
@@ -182,7 +182,6 @@ Workspace Name
 {
   "description": "Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications.",
   "docker_registry": "https://index.docker.io/v1/",
-  "name": "kasmweb/vs-code:develop",
   "image_src": "vs-code.png",
   "categories": [
     "Development"
@@ -193,9 +192,17 @@ Workspace Name
     "arm64"
   ],
   "compatibility": [
-    "1.13.x"
-  ],
-  "uncompressed_size_mb": 2170
+    {
+      "version": "1.16.x",
+      "image": "kasmweb/vs-code:1.16-rolling",
+      "uncompressed_size_mb": 2428
+    },
+    {
+      "version": "1.17.x",
+      "image": "kasmweb/vs-code:1.17-rolling",
+      "uncompressed_size_mb": 2528
+    }
+  ]
 }
 ```
 
@@ -205,7 +212,7 @@ Don't forget to commit your changes!
 
 ### Schema
 
-**Version** 1.0
+**Version** 1.1
 
 | Property              | Required | Type | Description |
 | --------------------- | -------- | --- | --- |
@@ -231,11 +238,17 @@ Head to the **Actions** tab to check your progress and once `Page build and depl
 
 ### New schema version
 
-When a new schema version comes out, you just need to create a new branch that refrlects the new schema, for example `1.1` and make it the default branch.
+When a new schema version comes out, you just need to create a new branch that refrlects the new schema, for example `1.2` and make it the default branch.
 
 In the new branch, make any updates that are needed, when the changes are committed a new version will be built.
 
 Kasm Workspaces will automatically pull the version of the schema that it understands.
+
+**Updating to 1.17.x support**
+
+1.17.x changed the schema from 1.0 to 1.1, the main changes to this are the compatibility changes from a simple array to an array of objects, this allows us to tie the image used and the image size to the kasm version.
+In addition the top level name is removed as is top level uncompessed_size_mb as these are now available in the compatibility matrix (name is called image).
+Finally change references to 1.0 to 1.1 in `build_all_branches.sh` and `site/next.config.js`
 
 &nbsp;
 
