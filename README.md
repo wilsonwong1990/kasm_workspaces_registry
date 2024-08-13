@@ -253,10 +253,31 @@ In the new branch, make any updates that are needed, when the changes are commit
 
 Kasm Workspaces will automatically pull the version of the schema that it understands.
 
-**Updating to 1.17.x support**
+If only the latest version is building (so 1.1 works but 1.0 doesn't), open build_all_branches.sh, search for `echo "All branches:` and check if there is `git fetch --all` on the line underneath, if not, add it.
 
-1.17.x changed the schema from 1.0 to 1.1, the main changes to this are the compatibility changes from a simple array to an array of objects, this allows us to tie the image used and the image size to the kasm version.
+**Updating to 1.16.x support**
+
+1.16.x changed the schema from 1.0 to 1.1, the main changes to this are the compatibility changes from a simple array to an array of objects, this allows us to tie the image used and the image size to the kasm version.
 In addition the top level name is removed as is top level uncompessed_size_mb as these are now available in the compatibility matrix (name is called image).
+
+If you have an older version you will probably need to update the following files:
+* build_all_branches.sh
+* processing/processjson.js
+* site/components/Workspace.js
+* site/pages/index.js
+* site/pages/new/[[..workspace]].js
+
+If you have a lot of workspaces (or just want an easier way to update your workspaces), there is an update file in processing called `update_1_0_to_1_1.js` copy that across to your own install, edit it and make sure the tags etc match your install. If you don't want to use channels, you can remove the available_tags section entirely.
+
+Then to use it, create a 1.1 branch from your current 1.0 source, then in a terminal:
+
+```
+cd processing
+npm install
+node update_1_0_to_1_1.js
+```
+
+This will convert your existing workspaces to a 1.1 compatible format.
 
 ## Channels
 Schema 1.1 added the concept of channels. Each registry can specify the channels they support, these are defined by the tags an image has. For example you might have develop, 1.17.0 and 1.17.0-rolling-daily. When the registry json is built it loops through all the workspaces and generates a list of all the possible "Channels" (tags) that are listed in compatibility.available_tags. Available tags is an optional list, if you don't include it on any of the workspaces then your registry will work as before without presenting the end user with a channels option. You shouldn't mix and match though, if you add available tags to 1 workspace, you should add available tags to all workspaces.

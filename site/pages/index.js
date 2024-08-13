@@ -18,7 +18,7 @@ export default function Home({ searchText }) {
         workspaces.workspaces.forEach((workspace) => {
           if(workspace.compatibility) {
             workspace.compatibility.forEach((v) => {
-              const value = parseFloat(v)
+              const value = parseFloat(v.version)
               if(wsversions.indexOf(value) === -1) {
                 wsversions.push(value)
               }
@@ -43,7 +43,7 @@ export default function Home({ searchText }) {
   }
 
   let filteredworkspaces = workspaces && workspaces.workspaces && workspaces.workspaces.length > 0 ? [...workspaces.workspaces] : [];
-  filteredworkspaces = filteredworkspaces.filter((v) => v.compatibility.some((el) => el === version + '.x'))
+  filteredworkspaces = filteredworkspaces.filter((v) => v.compatibility.some((el) => el.version === version + '.x'))
   const lowerSearch = searchText && searchText.toLowerCase();
   if (searchText && searchText !== "") {
     filteredworkspaces = filteredworkspaces.filter((i) => {

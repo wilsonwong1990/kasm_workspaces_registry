@@ -41,7 +41,7 @@ glob("**/workspace.json", async function (err, files) {
 
 		let parsed = JSON.parse(filedata);
 		parsed.sha = hash.hash;
-		console.log(parsed.name + ' added')
+		console.log(parsed.friendly_name + ' added')
 		parsed.compatibility.forEach((element, index) => {
 			if ('available_tags' in element) {
 				element.available_tags.forEach((el) => {
