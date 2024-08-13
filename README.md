@@ -91,7 +91,7 @@ Click on the **Actions** tab in the top menu and check whether workflows need en
 | env.icon  | The image to display for your registry. You can upload an image to `/site/public/` and reference that by https://domain.com/1.1/image.png or if you aren't using a {sub}domain by referencing it from https://username.github.io/repositoryname/1.1/image.png where image.png is the name of the image you uploaded. Alternatively just put the url of an image available on the web. If you just want to get the registry up and working, leave the default value in place until later. |
 | env.listUrl  | The link to the root of your site. For example https://username.github.io/repositoryname/ it should always include a trailing slash. |
 | env.contactUrl  | A link users can use to contact you on, such as your github issues page (right click the **Issues** tab in the top menu - next to the **Code** tab - and select `copy link address` and paste that in). |
-| basePath  | If you are using a domain or a subdomain, your basePath will just be `basePath: '/1.1',`, otherwise change the value to include what you chose for the repository name in step 2 `basePath: '/repositoryname/1.1',`. **The `1.1` will be replaced with the branch name automatically, so you should always keep it as 1.1.** |
+| basePath  | If you are using a domain or a subdomain, your basePath will just be `basePath: '/1.0',`, otherwise change the value to include what you chose for the repository name in step 2 `basePath: '/repositoryname/1.0',`. **The `1.0` will be replaced with the branch name automatically, so you should always keep it as 1.0.** |
 
 ### Commit changes
 <img width="600" alt="image" src="https://user-images.githubusercontent.com/5698566/230355586-39f6b4a6-9e01-482d-bab1-f0c1a292de24.png">
