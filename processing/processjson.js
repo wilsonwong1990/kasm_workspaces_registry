@@ -67,8 +67,13 @@ glob("**/workspace.json", async function (err, files) {
 		contact_url: nextConfig.env.contactUrl || null,
 		modified: Date.now(),
 		workspaces: workspaces,
-		channels: [...channels]
+		channels: [...channels],
+		default_channel: 'develop'
 	};
+
+	if (channels.size === 0) {
+		json.default_channel = null
+	}
 
 	let data = JSON.stringify(json);
 
