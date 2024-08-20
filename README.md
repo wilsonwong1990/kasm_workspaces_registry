@@ -242,6 +242,27 @@ Don't forget to commit your changes!
 | gpu_count             | False    | Integer | Specify the amount of GPUs to use for this workspace                                                 |
 | cpu_allocation_method | False    | String | What CPU allocation method to use for this workspace. Can be either "Inherit", "Quotas" or "Shares"  |
 
+The compatibility property is an array of objects and needs a bit more explanation
+```json
+  "compatibility": [
+    {
+      "version": "1.16.x",
+      "image": "kasmweb/chromium:1.16.0-rolling-daily",
+      "uncompressed_size_mb": 2643,
+      "available_tags": [
+        "develop",
+        "1.16.0",
+        "1.16.0-rolling-weekly",
+        "1.16.0-rolling-daily"
+      ]
+    }
+  ]
+```
+* **version** - This is the version of kasm the entry is compatible with
+* **image** - The docker image. The tag is included for things like estimating the size and is used if there are no available_tags.
+* **uncompressed_size_mb** - Integer of the approximate size of the workspace when it’s uncompressed in MB. This doesn’t take into account layers. For example if an image is 2.46GB you would enter 2460
+* **available_tags** - These values are what will determine the available "channels" on the front end. If you don't want/need channels, remove the available_tags section completely. You shouldn't mix and match though, if you specify available_tags for 1 workspace, it should be specified for all of them. That doesn't mean every workspace has to have all the same tags, if a workspace only has develop tags then it will only show when develop is the selected channel. 
+
 Head to the **Actions** tab to check your progress and once `Page build and deployment` is complete, your site should be ready.
 
 
