@@ -226,12 +226,10 @@ Don't forget to commit your changes!
 | Property              | Required | Type | Description |
 | --------------------- | -------- | --- | --- |
 | friendly_name         | True     | String | The name to show                                                                                     |
-| name                  | True     | String | The docker image to use                                                                              |
 | description           | True     | String | A short description of the workspace                                                                 |
 | image_src             | True     | String | The name of the workspace icon used                                                                  |
 | architecture          | True     | Array | Json list containing either "amd64", "arm64" or both                                                 |
 | compatability         | True     | Array | A list of Kasm versions the workspace should work with                                               |
-| uncompressed_size_mb  | True     | Integer | Integer of the approximate size of the workspace when it's uncompressed in MB. This doesn't take into account layers.  For example if an image is 2.46GB you would enter 2460 |
 | categories            | False    | Array | Json list containing the categories the workspace belongs too. This should be limited to a max of 3. |
 | docker_registry       | False    | String | Which docker registry to use                                                                         |
 | run_config            | False    | Object | Any additional parameters to add to the run config                                                   |
@@ -301,7 +299,7 @@ node update_1_0_to_1_1.js
 This will convert your existing workspaces to a 1.1 compatible format.
 
 ## Channels
-Schema 1.1 added the concept of channels. Each registry can specify the channels they support, these are defined by the tags an image has. For example you might have develop, 1.17.0 and 1.17.0-rolling-daily. When the registry json is built it loops through all the workspaces and generates a list of all the possible "Channels" (tags) that are listed in compatibility.available_tags. Available tags is an optional list, if you don't include it on any of the workspaces then your registry will work as before without presenting the end user with a channels option. You shouldn't mix and match though, if you add available tags to 1 workspace, you should add available tags to all workspaces.
+Schema 1.1 added the concept of channels. Each registry can specify the channels they support, these are defined by the tags an image has. For example you might have develop, 1.16.0 and 1.16.0-rolling-daily. When the registry json is built it loops through all the workspaces and generates a list of all the possible "Channels" (tags) that are listed in compatibility.available_tags. Available tags is an optional list, if you don't include it on any of the workspaces then your registry will work as before without presenting the end user with a channels option. You shouldn't mix and match though, if you add available tags to 1 workspace, you should add available tags to all workspaces.
 
 If you are using channels, update processing/processjson.js and specify the `default_channel` such as `'develop'`. If you aren't using channels you don't need to do anything, it will automatically detect there are no channels and set the correct value.
 
