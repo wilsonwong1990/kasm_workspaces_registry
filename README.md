@@ -263,6 +263,27 @@ The compatibility property is an array of objects and needs a bit more explanati
 
 Head to the **Actions** tab to check your progress and once `Page build and deployment` is complete, your site should be ready.
 
+### New Kasm Workspaces version
+
+When a new version of Kasm is released then a new entry needs to be added to the compatibility list to support it. If you have a lot of workspaces defined then there are a couple of scripts included that can help.
+
+Go to the processing folder and edit add_next_version.js changing the `baseversion` to match the new version. Also make sure the rest of the file matches your setup, if you anre't using channels then completely remove the `available_tags` section.
+
+Then in a terminal run
+
+```
+cd processing
+npm install
+node add_next_version.js
+```
+
+This will add a new entry for every single workspace, but the size will be set to 0, this is so you can run the `get_image_sizes.js` script. This will loop through each `image` that has an uncompressed_size_mb of 0 and will pull the image, get the size, update the workspace json and remove the image. 
+
+This can take a long time if you have a lot of workspaces and dependng on their sizes, but if the script crashes out, you can just start it agin and it will carry on from where it left off. 
+
+```
+node add_next_version.js
+```
 
 ### New schema version
 
