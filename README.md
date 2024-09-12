@@ -287,20 +287,20 @@ node add_next_version.js
 
 ### New schema version
 
-When a new schema version comes out, you just need to create a new branch that refrlects the new schema, for example `1.2` and make it the default branch.
+When a new schema version comes out, you just need to create a new branch that reflects the new schema, for example `1.2` and make it the default branch.
 
 In the new branch, make any updates that are needed, when the changes are committed a new version will be built.
 
 Kasm Workspaces will automatically pull the version of the schema that it understands.
 
-If only the latest version is building (so 1.1 works but 1.0 doesn't), open build_all_branches.sh, search for `echo "All branches:` and check if there is `git fetch --all` on the line underneath, if not, add it.
+If only the latest version is building (so 1.1 works but 1.0 doesn't), open build_all_branches.sh, search for `echo "All branches:` and check if there is `git fetch --all` on the line underneath, if not, add it, this will need to be added to the 1.0 branch as well if it's missing, otherwise if you make a change to 1.0 (for kasm versions 1.12.x - 1.15.x) it won't build all the branches.
 
 **Updating to 1.16.x support**
 
 1.16.x changed the schema from 1.0 to 1.1, the main changes to this are the compatibility changes from a simple array to an array of objects, this allows us to tie the image used and the image size to the kasm version.
 In addition the top level name is removed as is top level uncompessed_size_mb as these are now available in the compatibility matrix (name is called image).
 
-If you have an older version you will probably need to update the following files:
+If you have an older version you will probably need to update the following files in your 1.1 branch:
 * build_all_branches.sh
 * processing/processjson.js
 * site/components/Workspace.js
