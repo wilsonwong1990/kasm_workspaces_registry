@@ -4,7 +4,7 @@ const nextConfig = {
   env: {
     name: 'wwong',
     description: 'Some containers yo.',
-    icon: '/img/logo.svg',
+    icon: 'https://upload.wikimedia.org/wikipedia/en/3/3b/SpongeBob_SquarePants_character.svg',
     listUrl: 'https://blog.wwong.me/',
     contactUrl: 'https://github.com/wilsonwong1990',
   },
