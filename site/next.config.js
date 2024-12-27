@@ -5,7 +5,7 @@ const nextConfig = {
     name: 'wwong',
     description: 'Some containers yo.',
     icon: '/img/logo.svg',
-    listUrl: 'https://wilsonwong1990.github.io/kasm_workspaces_registry/',
+    listUrl: 'https://blog.wwong.me/',
     contactUrl: 'https://github.com/wilsonwong1990',
   },
   reactStrictMode: true,
