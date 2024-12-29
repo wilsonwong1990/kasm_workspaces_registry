@@ -1,5 +1,5 @@
 {
-  "description": "Visual Studio Code is a code editor redefined and optimized for building and debugging modern web and cloud applications.",
+  "description": "Adobe Flash support",
   "docker_registry": "https://registry.hub.docker.com",
   "name": "jchprj/play-adobe-flash-after-eol:latest",
   "image_src": "flash.png",
@@ -12,7 +12,8 @@
     "arm64"
   ],
   "compatibility": [
-    "1.13.x"
+    "1.13.x",
+    "1.14.x"
   ],
   "uncompressed_size_mb": 500
 }
